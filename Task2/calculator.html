@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    /* Basic body styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Calculator container styling */
+    .calculator {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+    }
+
+    /* Display screen styling */
+    .display {
+      width: 100%;
+      height: 60px;
+      background-color: #f0f0f0;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      text-align: right;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* Button grid container */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    /* Button styling */
+    .button {
+      background-color: #007bff;
+      color: white;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      padding: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    .button.operator {
+      background-color: #28a745;
+    }
+
+    .button.operator:hover {
+      background-color: #1c7c33;
+    }
+
+    .button.clear {
+      background-color: #dc3545;
+    }
+
+    .button.clear:hover {
+      background-color: #a71d2a;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <!-- Display screen -->
+    <input type="text" id="display" class="display" disabled>
+    
+    <!-- Buttons -->
+    <div class="buttons">
+      <!-- Number buttons -->
+      <button class="button" onclick="appendValue('7')">7</button>
+      <button class="button" onclick="appendValue('8')">8</button>
+      <button class="button" onclick="appendValue('9')">9</button>
+      <button class="button operator" onclick="appendValue('/')">÷</button>
+
+      <button class="button" onclick="appendValue('4')">4</button>
+      <button class="button" onclick="appendValue('5')">5</button>
+      <button class="button" onclick="appendValue('6')">6</button>
+      <button class="button operator" onclick="appendValue('*')">×</button>
+
+      <button class="button" onclick="appendValue('1')">1</button>
+      <button class="button" onclick="appendValue('2')">2</button>
+      <button class="button" onclick="appendValue('3')">3</button>
+      <button class="button operator" onclick="appendValue('-')">−</button>
+
+      <button class="button" onclick="appendValue('0')">0</button>
+      <button class="button" onclick="appendValue('.')">.</button>
+      <button class="button clear" onclick="clearDisplay()">C</button>
+      <button class="button operator" onclick="appendValue('+')">+</button>
+
+      <!-- Equal button -->
+      <button class="button" style="grid-column: span 4;" onclick="calculateResult()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+
+    // Function to append values to the display
+    function appendValue(value) {
+      display.value += value;
+    }
+
+    // Function to clear the display
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    // Function to calculate the result
+    function calculateResult() {
+      try {
+        // Use eval to evaluate the expression
+        display.value = eval(display.value);
+      } catch (error) {
+        // If there's an error (e.g., invalid expression), show an alert
+        alert('Invalid Expression');
+        clearDisplay();
+      }
+    }
+  </script>
+</body>
+</html>
